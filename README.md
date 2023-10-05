@@ -1,5 +1,8 @@
-# beat-bat
-Eyesy Mode: S - Beat Bat
+# Eyesy Modes
+Eyesy Modes Created: 
+S - Beat Bat
+T - Parked Car
 
+Modes created for the Gritter & Guitari Eyesy.
 
-Here's a code breakdown and general development thoughts on the Eyesy
+Additional information on how Modes are contructed and run can be found on [rodeoround.com](rodeoround.com)
