@@ -13,9 +13,12 @@ def setup(screen, etc):
     xr = etc.xres
     yr = etc.yres
     base_path = etc.mode_root
-    image = pygame.image.load(base_path + 'Images/pumpkin.png').convert()
-    font = pygame.font.Font(base_path + 'Fonts/scary-halloween/Scary Halloween Font.ttf', 60)
-    prime_font = pygame.font.Font(base_path + 'Fonts/courier-prime/CourierPrime-Regular.ttf', 15)
+    image_filepath = base_path + '/Images/pumpkin.png'
+    image = pygame.image.load(image_filepath).convert()
+    font_filepath_1 = base_path + '/Fonts/scary-halloween/Scary Halloween Font.ttf'
+    font = pygame.font.Font(font_filepath_1, 60)
+    font_filepath_2 = base_path + '/Fonts/courier-prime/CourierPrime-Regular.ttf'
+    prime_font = pygame.font.Font(font_filepath_2, 15)
     with open(base_path + '/Text/halloween_script.txt', 'r') as script:
         script_line = script.readlines()
     pass

@@ -15,15 +15,15 @@ def setup(screen, etc):
     quarters = [(xr*0.1, 0), (xr*0.6, 0), (xr*0.1, yr*0.5), (xr*0.6, yr*0.5)]
     
     base_path = etc.mode_root
-    image = pygame.image.load(base_path + 'Images/car.png')
-    font = pygame.font.Font(base_path + 'Fonts/panamera/Panamera-Bold.otf', 100)
+    image = pygame.image.load(base_path + '/Images/car.png')
+    font = pygame.font.Font(base_path + '/Fonts/panamera/Panamera-Bold.otf', 100)
     pass
 
 def draw(screen, etc):
     global counter
     pygame.time.Clock().tick(15)
     
-    bg_color = etc.color_picker_bg(abs(math.sin(etc.knob5 + time.time() * .025)))
+    bg_color = etc.color_picker_bg(etc.knob5)
     car_image_size = (int(image.get_width() * etc.knob1), int(image.get_height() * etc.knob1))
     img = pygame.transform.scale(image, car_image_size)
     
