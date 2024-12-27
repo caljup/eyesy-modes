@@ -1,5 +1,5 @@
 # Eyesy Modes
-Eyesy Modes Created: 
+Completed Modes: 
 * S - Beat Bat
 * S - Halloween
 * T - Parked Car
