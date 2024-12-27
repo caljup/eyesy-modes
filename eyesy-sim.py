@@ -7,6 +7,8 @@ import math
 import os
 import pygame
 import sys
+import pyaudio
+import numpy as np
 
 # Command line argument parsing
 parser = argparse.ArgumentParser(description="Critter and Guitari Eyesy program debug environment")
@@ -133,7 +135,7 @@ eyesy_mode.setup(screen, eyesy_instance)
 # Main loop
 running = True
 clear_screen = True  # Flag to control screen clearing
-display_info_flag = False 
+display_info_flag = False
 
 while running:
     if clear_screen:
