@@ -1,17 +1,17 @@
 # Eyesy Modes
 Eyesy Modes Created: 
-S - Beat Bat
-S - Halloween
-T - Parked Car
+* S - Beat Bat
+* S - Halloween
+* T - Parked Car
 
 In Development:
-S - 3D Pipelines
-S - Back to Back
-S - Lava Lamp
-S - Mr Chweibabyyyy
-S - Spiral Alley
-S - Tri Tri Tri
-T - Mess The Etch A Sketch
+* S - 3D Pipelines
+* S - Back to Back
+* S - Lava Lamp
+* S - Mr Chweibabyyyy
+* S - Spiral Alley
+* S - Tri Tri Tri
+* T - Mess The Etch A Sketch
 
 
 Modes created for the Critter & Guitari Eyesy.
