@@ -123,10 +123,9 @@ def draw_spiral_line(screen, x, y, radius, etc, color):
     radius = radius + 1000 * etc.knob1
     global spiral_angle_offset
     spiral_angle_offset += 0.1 * etc.knob2
-    base_num_points = 10000
+    base_num_points = 2000
     if spiral_angle_offset > 2 * math.pi:
         spiral_angle_offset = 0
-    base_num_points = 10000
     num_points = int(base_num_points * etc.knob2 + 50)
     spiral_points = []
     for i in range(num_points):

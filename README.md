@@ -2,13 +2,13 @@
 Completed Modes: 
 * S - Beat Bat
 * S - Halloween
+* S - Mr Schwibabyyyy
 * T - Parked Car
 
 In Development:
 * S - 3D Pipelines
 * S - Back to Back
 * S - Lava Lamp
-* S - Mr Chweibabyyyy
 * S - Spiral Alley
 * S - Tri Tri Tri
 * T - Mess The Etch A Sketch

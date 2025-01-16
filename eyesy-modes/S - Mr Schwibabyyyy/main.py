@@ -1,8 +1,5 @@
 import pygame
-from pygame import gfxdraw
-import os
 import math
-import time
 import random
 
 def setup(screen, etc):
@@ -57,12 +54,11 @@ def draw(screen, etc):
     mr_schwib_img = load_mr_schwib(screen)
     
     text_display(screen, etc, color, mr_schwib_img, xr, yr)
-    execute_mouth_mode(screen, color, etc)
     draw_hair(screen, color, mr_swchwib_image, etc)
-
-
+    execute_mouth_mode(screen, color, etc)
+    
 def load_mr_schwib(screen):
-    image_size_x=int(mr_swchwib_image.get_width() * 0.3) if mr_swchwib_image.get_width() > xr else mr_swchwib_image.get_width()
+    image_size_x=int(mr_swchwib_image.get_width() * 0.4) if mr_swchwib_image.get_width() > xr else mr_swchwib_image.get_width()
     image_size_y=int(yr) if mr_swchwib_image.get_height() > yr else mr_swchwib_image.get_height()
     image_res = (int(image_size_x), int(image_size_y))
     
@@ -74,25 +70,24 @@ def load_mr_schwib(screen):
 def execute_mouth_mode(screen, color, etc):
     global points, spiral_angle_offset, x, y
     
-    if etc.knob3 <= 0.33:
+    if etc.knob3 < 0.33:
+        draw_lip(screen, etc)
+    elif etc.knob3 >= 0.33 and etc.knob3 < 0.66:
         spiral_angle_offset += 0.1 * etc.knob2
         if spiral_angle_offset > 2 * math.pi:
             spiral_angle_offset = 0
-        base_num_points = 10000
+        base_num_points = 1750
         if etc.knob2 > 0:
-            num_points = int(base_num_points * etc.knob2 + 50)
+            num_points = int(base_num_points * etc.knob2 + 1)
             draw_spiral_line(screen, x, y, 1, num_points, color, spiral_angle_offset)
         else:
             pass
-    elif etc.knob3 > 0.33 and etc.knob3 <= 0.66:
+    else:
         if etc.audio_trig == False:
             x, y, points = grow_mouth(x, y, points, etc)
         else:
             decrease_mouth(points)
         draw_mouth(screen, points, color, etc)
-    else:
-        draw_lip(screen, etc)
-    
         
 
 def grow_mouth(x, y, points, etc):
@@ -124,17 +119,17 @@ def decrease_mouth(points):
         
 def draw_mouth(screen, points, color, etc):
     for i in range(1, len(points)):
-        pygame.draw.line(screen, color, points[i-1], points[i], width=4)
+        pygame.draw.line(screen, color, points[i-1], points[i], 4)
 
 def draw_spiral_line(screen,x, y, radius, num_points, color, spiral_angle_offset):
     spiral_points = []
     for i in range(num_points):
         spiral_angle = -i * 0.1 + spiral_angle_offset
-        r = radius + i * 0.1
+        r = radius + i * 0.5
         px = screen_center[0] + r * math.cos(spiral_angle)
         py = screen_center[1] + r * math.sin(spiral_angle)
         spiral_points.append((px, py))
-    pygame.draw.lines(screen, color, False, spiral_points, 2)
+    pygame.draw.lines(screen, color, False, spiral_points, 8)
 
 def draw_lip(screen, etc):
     global lip_images, current_lip, current_note
@@ -157,7 +152,7 @@ def draw_lip(screen, etc):
         offset_y = (screen_center[1] - img_center_y)
         screen.blit(img, (offset_x, offset_y))
         
-    if current_note != etc.audio_in[0]:
+    if current_note != etc.audio_in[0] :
         current_lip = (current_lip + 1) % len(lip_images)
         current_note = etc.audio_in[0]
 
@@ -224,5 +219,4 @@ def draw_hair(screen, color, img, etc):
         line_positions.append(((x1, y1), (x2, y2)))
         pygame.draw.line(screen, color, (x1, y1), (x2, y2), 5)
     
-    pygame.display.flip()
     
