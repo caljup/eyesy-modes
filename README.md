@@ -4,13 +4,14 @@ Completed Modes:
 * S - Halloween
 * S - Mr Schwibabyyyy
 * T - Parked Car
+* T - Spiral Alley
 
 In Development:
 * S - 3D Pipelines
 * S - Back to Back
 * S - Lava Lamp
-* S - Spiral Alley
 * S - Tri Tri Tri
+* T - Doom
 * T - Mess The Etch A Sketch
 
 
