@@ -41,7 +41,7 @@ def draw(screen, etc):
         mess = not mess
     
     # clear the drawing
-    if etc.audio_trig and all((etc.knob1 == 1, etc.knob2 == 1, etc.knob3 == 1, etc.knob4 == 1, etc.knob5 == 1)):
+    if etc.audio_trig and all((etc.knob1 == 1, etc.knob2 == 1, etc.knob3 == 0, etc.knob4 == 1, etc.knob5 == 1)):
         drawing = [current_pos]  
 
     current_pos = (
