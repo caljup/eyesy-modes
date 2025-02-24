@@ -120,7 +120,8 @@ def display_info(screen, eyesy_instance):
         f"Knob5: {eyesy_instance.knob5:.2f}",
         f"Audio Trig: {'On' if eyesy_instance.audio_trig else 'Off'}",
         f"Audio In: {eyesy_instance.audio_in[0]:.2f}",
-        f"Background Color: ({eyesy_instance.bg_color[0]:.2f}, {eyesy_instance.bg_color[1]:.1f}, {eyesy_instance.bg_color[2]:.1f})"
+        f"Background Color: ({eyesy_instance.bg_color[0]:.2f}, {eyesy_instance.bg_color[1]:.1f}, {eyesy_instance.bg_color[2]:.1f})",
+        f"Persist: {clear_screen}"
     ]
     for line in info_lines:
         text = font.render(line, True, WHITE)
@@ -141,10 +142,11 @@ while running:
     if clear_screen:
         screen.fill(eyesy_instance.bg_color)  # Clear the screen with black
 
-    eyesy_mode.draw(screen, eyesy_instance)
+    eyesy_mode.draw(screen, eyesy_instance) 
 
     key = pygame.key.get_pressed()
     update_knobs(key, knobs)
+    eyesy_instance.audio_trig = False
 
     if key[pygame.K_q]:
         running = False

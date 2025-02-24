@@ -120,7 +120,8 @@ setup(ext_modules=cythonize([
               sources=["./cydoomgeneric/cydoomgeneric.pyx"] +
               [f"./doomgeneric/{src}" for src in doom_src],
               include_dirs=["./doomgeneric",
-                            numpy.get_include()],
+                            numpy.get_include(),
+                            "./cython"],
               define_macros=define_macros,
               extra_link_args=extra_link_args,
               libraries=libraries),

@@ -50,3 +50,4 @@ ENV/
 *.WAD
 .ropeproject/
 .savegame/
+.rtf

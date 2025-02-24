@@ -2,6 +2,7 @@
 Completed Modes: 
 * S - Beat Bat
 * S - Halloween
+* S - Mess A Sketch
 * S - Mr Schwibabyyyy
 * T - Parked Car
 * T - Spiral Alley
@@ -12,7 +13,6 @@ In Development:
 * S - Lava Lamp
 * S - Tri Tri Tri
 * T - Doom
-* T - Mess The Etch A Sketch
 
 
 Modes created for the Critter & Guitari Eyesy.
