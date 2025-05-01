@@ -10,6 +10,7 @@ Completed Modes:
 In Development:
 * S - 3D Pipelines
 * S - Back to Back
+* S - Charts
 * S - Lava Lamp
 * S - Tri Tri Tri
 * T - Doom

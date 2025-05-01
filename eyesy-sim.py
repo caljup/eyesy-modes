@@ -33,7 +33,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 # Knob values and settings
-knobs = {1: 0.1, 2: 0.2, 3: 0.3, 4: 0.4, 5: 0.5, "step": 0.025}
+knobs = {1: 0.1, 2: 0.2, 3: 0.3, 4: 0.4, 5: 0.5, "step": 0.01}
 
 class Eyesy:
     def __init__(self):
