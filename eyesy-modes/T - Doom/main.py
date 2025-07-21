@@ -70,7 +70,7 @@ def display_info(screen, eyesy_instance):
         f"Knob3: {eyesy_instance.knob3:.2f}",
         f"Knob4: {eyesy_instance.knob4:.2f}",
         f"Knob5: {eyesy_instance.knob5:.2f}",
-        f"Audio Trig: {'On' if eyesy_instance.audio_trig else 'Off'}",
+        f"Audio Trig: {'On' if eyesy_instance.trig else 'Off'}",
         f"Audio In: {eyesy_instance.audio_in[0]:.2f}",
     ]
     for line in info_lines:
@@ -80,13 +80,13 @@ def display_info(screen, eyesy_instance):
 
 class PygameDoom:
 
-    def __init__(self, etc) -> None:
-        self._resx = etc.xres
-        self._resy = etc.yres
-        self.etc = etc
+    def __init__(self, eyesy) -> None:
+        self._resx = eyesy.xres
+        self._resy = eyesy.yres
+        self.eyesy = eyesy
         self._screen = pygame.display.get_surface()
         self._pixels = np.zeros((self._resy, self._resx, 3), dtype=np.uint8)
-        self.prev_knob_values = {1: etc.knob1, 2: etc.knob2, 3: etc.knob3, 4: etc.knob4, 5: etc.knob5, "step": 0.01}
+        self.prev_knob_values = {1: eyesy.knob1, 2: eyesy.knob2, 3: eyesy.knob3, 4: eyesy.knob4, 5: eyesy.knob5, "step": 0.01}
         self.debounce_time = 0.5  # 100ms debounce time
         self.last_event_time = 0
 
@@ -94,7 +94,7 @@ class PygameDoom:
         pixels = np.rot90(pixels)
         pixels = np.flipud(pixels)
         pygame.surfarray.blit_array(self._screen, pixels[:, :, [2, 1, 0]])
-        # display_info(self._screen, self.etc)
+        # display_info(self._screen, self.eyesy)
         pygame.display.flip()
 
     def update_knobs(self, key, knobs):
@@ -104,7 +104,7 @@ class PygameDoom:
                 knobs[knob_id] = min(knobs[knob_id] + knobs["step"], 1.0)
             if key[getattr(pygame, f"K_{knob_id}")] and key[pygame.K_k]:
                 knobs[knob_id] = max(knobs[knob_id] - knobs["step"], 0.0)
-            setattr(self.etc, f"knob{knob_id}", knobs[knob_id])
+            setattr(self.eyesy, f"knob{knob_id}", knobs[knob_id])
         return knobs
 
     def get_key(self) -> Optional[tuple[int, int]]:
@@ -121,10 +121,10 @@ class PygameDoom:
 
         # Check if any knobs are in a zone that triggers a keyboard input
         for knob_id, values in key_mapping.items():
-            knob_val = self.etc.__dict__[knob_id]
+            knob_val = self.eyesy.__dict__[knob_id]
             if knob_val == 1.0:
                 event_type = pygame.KEYDOWN
-                event_key = values[1.0]
+                event_key = values[knob_id]
                 if pygame.time.get_ticks() - self.last_event_time > self.debounce_time:
                     pygame.event.post(pygame.event.Event(event_type, key=event_key))
                     self.last_event_time = pygame.time.get_ticks()
@@ -161,14 +161,14 @@ class PygameDoom:
         pygame.display.set_caption(t)
         
 initialized = False
-def setup(screen, etc):
+def setup(screen, eyesy):
     global g, initialized
     if not initialized:
-        g = PygameDoom(etc)
+        g = PygameDoom(eyesy)
         cdg.init(g._resx, g._resy, g.draw_frame, g.get_key, set_window_title=g.set_window_title)
         
         initialized = True
 
-def draw(screen, etc):
+def draw(screen, eyesy):
     cdg.main()
     

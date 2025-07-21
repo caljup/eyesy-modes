@@ -1,30 +1,30 @@
 import pygame
 import random
 
-def setup(screen, etc):
+def setup(screen, eyesy):
     global drawing, current_pos, mess
     current_pos = (
-        (int(etc.knob1 * etc.xres), int((1 - etc.knob2) * etc.yres)), 
-        etc.color_picker(etc.knob4), 
-        int(etc.knob3 * 0)
+        (int(eyesy.knob1 * eyesy.xres), int((1 - eyesy.knob2) * eyesy.yres)), 
+        eyesy.color_picker(eyesy.knob4), 
+        int(eyesy.knob3 * 0)
         )
     
     drawing = [current_pos]
     mess = False
 
-def draw(screen, etc):
+def draw(screen, eyesy):
     global drawing, current_pos, mess
     pygame.time.Clock().tick(60)
     
-    screen.fill(etc.color_picker_bg(etc.knob5))
+    screen.fill(eyesy.color_picker_bg(eyesy.knob5))
     
     if drawing[-1][0] == current_pos[0]:
         drawing[-1] == current_pos
-    elif drawing[-1] != current_pos and int(etc.knob3 * 30) > 0:
+    elif drawing[-1] != current_pos and int(eyesy.knob3 * 30) > 0:
         drawing.append(current_pos)
 
     if mess:
-        audio_level = abs(etc.audio_in[0]) / 32767.0
+        audio_level = abs(eyesy.audio_in[0]) / 32767.0
         random_offset = int(audio_level * 50) 
         for i in range(1, len(drawing)):
             pygame.draw.line(screen, drawing[i][1], 
@@ -37,17 +37,17 @@ def draw(screen, etc):
         for i in range(1, len(drawing)):
             pygame.draw.line(screen, drawing[i][1], drawing[i-1][0], drawing[i][0], drawing[i][2])
             
-    if etc.audio_trig:
+    if eyesy.trig:
         mess = not mess
     
     # clear the drawing
-    if etc.audio_trig and all((etc.knob1 == 1, etc.knob2 == 1, etc.knob3 == 0, etc.knob4 == 1, etc.knob5 == 1)):
+    if eyesy.trig and all((eyesy.knob1 == 1, eyesy.knob2 == 1, eyesy.knob3 == 0, eyesy.knob4 == 1, eyesy.knob5 == 1)):
         drawing = [current_pos]  
 
     current_pos = (
-        (int(etc.knob1 * etc.xres), int((1 -etc.knob2) * etc.yres)), 
-        etc.color_picker(etc.knob4), 
-        int(etc.knob3 * 30)
+        (int(eyesy.knob1 * eyesy.xres), int((1 -eyesy.knob2) * eyesy.yres)), 
+        eyesy.color_picker(eyesy.knob4), 
+        int(eyesy.knob3 * 30)
         )
     
-    pygame.draw.line(screen, etc.color_picker(etc.knob4), (int(etc.knob1 * etc.xres), int((1 -etc.knob2) * etc.yres)), (int(etc.knob1 * etc.xres), int((1 -etc.knob2) * etc.yres)), int(etc.knob3 * 30) + 5)
+    pygame.draw.line(screen, eyesy.color_picker(eyesy.knob4), (int(eyesy.knob1 * eyesy.xres), int((1 -eyesy.knob2) * eyesy.yres)), (int(eyesy.knob1 * eyesy.xres), int((1 -eyesy.knob2) * eyesy.yres)), int(eyesy.knob3 * 30) + 5)

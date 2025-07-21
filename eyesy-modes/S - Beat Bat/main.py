@@ -3,24 +3,24 @@ import os
 import math
 import time
 
-def setup(screen, etc):
+def setup(screen, eyesy):
     global xr, yr, img, font, font_size
-    xr = etc.xres
-    yr = etc.yres
+    xr = eyesy.xres
+    yr = eyesy.yres
     print(xr, yr)
     
-    filepath = etc.mode_root + '/Images/billy-bat.png'
+    filepath = eyesy.mode_root + '/Images/billy-bat.png'
     img = pygame.image.load(filepath)
     font_size = 50
-    font_filepath = etc.mode_root + '/Fonts/Square Chunks.ttf'
+    font_filepath = eyesy.mode_root + '/Fonts/Square Chunks.ttf'
     font = pygame.font.Font(font_filepath, font_size)
     pass
 
-def draw(screen, etc):
+def draw(screen, eyesy):
     pygame.time.Clock().tick(30)
     
-    bg_color = etc.color_picker_bg(etc.knob5)
-    color = etc.color_picker(etc.knob4)
+    bg_color = eyesy.color_picker_bg(eyesy.knob5)
+    color = eyesy.color_picker(eyesy.knob4)
     # text_color = (color[0],int(127 + 127 * math.sin(25 * .0001 + time.time())),color[2])
     
     text = font.render('97.1  :  Beat Bat', True, color)
@@ -30,9 +30,9 @@ def draw(screen, etc):
     screen.blit(text2, (50 + offset, 50 - offset))
     screen.blit(text, (50 + offset * 2, 50 - offset * 2))
     
-    point = int(etc.knob3 * 100)
-    audio_flux = abs(int(etc.audio_in[0] / 100))
-    audio_flux2 = abs(int(etc.audio_in[0] / 100))
+    point = int(eyesy.knob3 * 100)
+    audio_flux = abs(int(eyesy.audio_in[0] / 100))
+    audio_flux2 = abs(int(eyesy.audio_in[0] / 100))
     
     for i in range(0, 13):
         poly_points1 = []
@@ -49,11 +49,11 @@ def draw(screen, etc):
         pygame.draw.polygon(screen, color, poly_points1, 100 )
         pygame.draw.polygon(screen, color, poly_points2, 75 )
     
-    if etc.knob1 != 0.0:
-        image_size_x=int(img.get_width() * etc.knob1)
-        image_size_y=int(img.get_height() * etc.knob1)
-        image_res = (int(image_size_x + (audio_flux*.5)), int(image_size_y + (audio_flux2*.5)))
+    if eyesy.knob1 != 0.0:
+        image_size_x=int(img.get_width() * eyesy.knob1)
+        image_size_y=int(img.get_height() * eyesy.knob1)
+        image_res = (int(image_size_x), int(image_size_y))
         image = pygame.transform.scale(img, image_res)
-        image = pygame.transform.rotate(image, etc.knob2 * 100)
-        screen.blit(image, (xr * .8 ,yr/2.75))
+        image = pygame.transform.rotate(image, eyesy.knob2 * 100)
+        screen.blit(image, (xr * .6 ,yr/2.75))
         

@@ -8,11 +8,11 @@ start_line = 0
 end_line = 25
 counter = 0
 
-def setup(screen, etc):
+def setup(screen, eyesy):
     global xr, yr, image, font, base_path, script, script_line, prime_font
-    xr = etc.xres
-    yr = etc.yres
-    base_path = etc.mode_root
+    xr = eyesy.xres
+    yr = eyesy.yres
+    base_path = eyesy.mode_root
     image_filepath = base_path + '/Images/pumpkin.png'
     image = pygame.image.load(image_filepath).convert()
     font_filepath_1 = base_path + '/Fonts/scary-halloween/Scary Halloween Font.ttf'
@@ -23,22 +23,22 @@ def setup(screen, etc):
         script_line = script.readlines()
     pass
 
-def draw(screen, etc):
+def draw(screen, eyesy):
     pygame.time.Clock().tick(20)
-    etc.color_picker_bg(0)
+    eyesy.color_picker_bg(0)
     
-    _pumpkin_lighting(screen, etc)
+    _pumpkin_lighting(screen, eyesy)
     
-    if etc.knob5 >= 0.5:
-        _script_display(screen, etc)
-    elif etc.knob5 > 0:
+    if eyesy.knob5 >= 0.5:
+        _script_display(screen, eyesy)
+    elif eyesy.knob5 > 0:
         text = font.render('Halloween', True, (235, 97, 35))
-        screen.blit(text, (int(xr * etc.knob3), int(yr * etc.knob4)))
+        screen.blit(text, (int(xr * eyesy.knob3), int(yr * eyesy.knob4)))
     else:
         pass
     
     
-def _pumpkin_lighting(screen, etc):
+def _pumpkin_lighting(screen, eyesy):
     global alpha, alpha_prev, grow, pumpkin_growth
     pumpkin_image_size = (
         int(image.get_width()/4 + pumpkin_growth),
@@ -46,7 +46,7 @@ def _pumpkin_lighting(screen, etc):
         )
     img = pygame.transform.scale(image, pumpkin_image_size)
     alpha_threshold = 200
-    alpha_new = sum(map(abs, etc.audio_in[0:50]))/2500
+    alpha_new = sum(map(abs, eyesy.audio_in[0:50]))/2500
     alpha = alpha + alpha_new - alpha_prev
     alpha_prev = alpha_new
     img.set_alpha(alpha_threshold) if alpha > alpha_threshold else img.set_alpha(alpha)
@@ -58,12 +58,12 @@ def _pumpkin_lighting(screen, etc):
         pumpkin_growth += 1
         if pumpkin_growth >= 500: grow = True
     
-    img_dest = (int(xr * etc.knob1), int(yr * etc.knob2))
+    img_dest = (int(xr * eyesy.knob1), int(yr * eyesy.knob2))
     
     screen.blit(img, img_dest)
     
 
-def _script_display(screen, etc):
+def _script_display(screen, eyesy):
     global start_line, end_line, counter, script_line, prime_font
     if start_line >= len(script_line):
         start_line = 0
@@ -75,11 +75,11 @@ def _script_display(screen, etc):
     script_lines = script_line[start_line:end_line]
     for i, l in enumerate(script_lines):
         text = prime_font.render(l.replace('\n', ' '), True, (235, 97, 35))
-        screen.blit(text, (int(xr * etc.knob3), yr/10 + i*20))
+        screen.blit(text, (int(xr * eyesy.knob3), yr/10 + i*20))
     
-    if counter > 20 * etc.knob4:
+    if counter > (1 - eyesy.knob4):
         start_line += 1
         end_line += 1
         counter = 0
     else:
-        counter += 1
+        counter += .1

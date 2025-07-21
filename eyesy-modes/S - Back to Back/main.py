@@ -3,15 +3,15 @@ import os
 import math
 import time
 
-def setup(screen, etc):
+def setup(screen, eyesy):
     global xr, yr
-    xr = etc.xres
-    yr = etc.yres
+    xr = eyesy.xres
+    yr = eyesy.yres
     print(xr, yr)
     pygame.display.set_caption("Back to Back")
     
     pass
 
-def draw(screen, etc):
+def draw(screen, eyesy):
     pygame.time.Clock().tick(30)
 

@@ -4,10 +4,10 @@ import random
 import time
 import colorsys
 
-def setup(screen, etc):
+def setup(screen, eyesy):
     global screen_xres, screen_yres, screen_center
-    screen_xres = etc.xres
-    screen_yres = etc.yres
+    screen_xres = eyesy.xres
+    screen_yres = eyesy.yres
     screen_center = (screen_xres // 2, screen_yres // 2)
     
     pygame.display.set_caption("Tri Tri Tri")
@@ -37,8 +37,8 @@ class TriangleArmAnimator:
     def reset(self):
         self.phase_positions = [i * 2 * math.pi / self.num_arm_parts for i in range(self.num_arm_parts)]
 
-    def increment(self, knob_value, audio_trig):
-        if audio_trig:
+    def increment(self, knob_value, trig):
+        if trig:
             self.increment_mode_index = (self.increment_mode_index + 1) % len(self.increment_modes)
             print(f"Switching to increment mode: {self.increment_modes[self.increment_mode_index]}")
             
@@ -131,17 +131,17 @@ class TriangleArmAnimator:
             self.draw_sierpinski_triangle(screen, x - size / 4, y + size * math.sqrt(3) / 4, size / 2, color, depth - 1)
             self.draw_sierpinski_triangle(screen, x + size / 4, y + size * math.sqrt(3) / 4, size / 2, color, depth - 1)
 
-def draw(screen, etc):
+def draw(screen, eyesy):
     pygame.time.Clock().tick(30)
-    triangle_center_x_offset = 200 * etc.knob2
-    triangle_center_y_offset = 200 * etc.knob2
-    radius = 300 * etc.knob2
-    num_layers = int(etc.knob3 * 35)
-    triangle_size = int(etc.knob4 * 10)
+    triangle_center_x_offset = 200 * eyesy.knob2
+    triangle_center_y_offset = 200 * eyesy.knob2
+    radius = 300 * eyesy.knob2
+    num_layers = int(eyesy.knob3 * 35)
+    triangle_size = int(eyesy.knob4 * 10)
     
-    background_color = etc.color_picker_bg(etc.knob5)
-    color = etc.color_picker(etc.knob4)
+    background_color = eyesy.color_picker_bg(eyesy.knob5)
+    color = eyesy.color_picker(eyesy.knob4)
     triangle_animator.update_color_transition()
     
     triangle_animator.draw_triangle_arms(screen, triangle_center_x_offset, triangle_center_y_offset, color, background_color, num_layers, radius, triangle_size)
-    triangle_animator.increment(etc.knob1, etc.audio_trig)
+    triangle_animator.increment(eyesy.knob1, eyesy.trig)

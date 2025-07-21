@@ -39,7 +39,7 @@ class Eyesy:
     def __init__(self):
         for knob_id in range(1, 6):
             setattr(self, f"knob{knob_id}", knobs[knob_id])
-        self.audio_trig = False
+        self.trig = False
         self.midi_note_new = False
         self.mode_root = os.path.dirname(eyesy_mode.__file__)
         self.xres, self.yres = 1280, 720
@@ -118,7 +118,7 @@ def display_info(screen, eyesy_instance):
         f"Knob3: {eyesy_instance.knob3:.2f}",
         f"Knob4: {eyesy_instance.knob4:.2f}",
         f"Knob5: {eyesy_instance.knob5:.2f}",
-        f"Audio Trig: {'On' if eyesy_instance.audio_trig else 'Off'}",
+        f"Audio Trig: {'On' if eyesy_instance.trig else 'Off'}",
         f"Audio In: {eyesy_instance.audio_in[0]:.2f}",
         f"Background Color: ({eyesy_instance.bg_color[0]:.2f}, {eyesy_instance.bg_color[1]:.1f}, {eyesy_instance.bg_color[2]:.1f})",
         f"Persist: {clear_screen}"
@@ -146,14 +146,14 @@ while running:
 
     key = pygame.key.get_pressed()
     update_knobs(key, knobs)
-    eyesy_instance.audio_trig = False
+    eyesy_instance.trig = False
 
     if key[pygame.K_q]:
         running = False
     if key[pygame.K_SPACE]:
-        eyesy_instance.audio_trig = True
+        eyesy_instance.trig = True
     if key[pygame.K_z]:
-        eyesy_instance.audio_trig = False
+        eyesy_instance.trig = False
     if key[pygame.K_x]:
         eyesy_instance.audio_in = [random.randint(-32768, 32767) for _ in range(100)]
     if key[pygame.K_c]:
