@@ -1,9 +1,5 @@
 import pygame
 import random
-import time
-import math
-
-
 
 def setup(screen, eyesy):
     global xr, yr, counter, quarters, image, font
