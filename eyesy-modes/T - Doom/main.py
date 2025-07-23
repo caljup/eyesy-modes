@@ -32,7 +32,7 @@ keymap = {
     pygame.K_COMMA: cdg.Keys.STRAFE_L,
     pygame.K_PERIOD: cdg.Keys.STRAFE_R,
     pygame.K_LCTRL: cdg.Keys.FIRE,
-    pygame.K_a: cdg.Keys.USE,
+    pygame.K_SPACE: cdg.Keys.USE,
     pygame.K_RSHIFT: cdg.Keys.RSHIFT,
     pygame.K_RETURN: cdg.Keys.ENTER,
     pygame.K_ESCAPE: cdg.Keys.ESCAPE,
@@ -115,9 +115,6 @@ class PygameDoom:
             if key[k]:
                 kl.append(k)
         updated_knobs = self.update_knobs(key, knobs)
-
-        # Check if any knobs are in a zone that triggers a keyboard input
-
 
         # Check if any knobs are in a zone that triggers a keyboard input
         for knob_id, values in key_mapping.items():

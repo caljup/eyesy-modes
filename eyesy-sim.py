@@ -121,7 +121,7 @@ def display_info(screen, eyesy_instance):
         f"Audio Trig: {'On' if eyesy_instance.trig else 'Off'}",
         f"Audio In: {eyesy_instance.audio_in[0]:.2f}",
         f"Background Color: ({eyesy_instance.bg_color[0]:.2f}, {eyesy_instance.bg_color[1]:.1f}, {eyesy_instance.bg_color[2]:.1f})",
-        f"Persist: {clear_screen}"
+        f"Persist: {not clear_screen}"
     ]
     for line in info_lines:
         text = font.render(line, True, WHITE)

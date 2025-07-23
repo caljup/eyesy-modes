@@ -6,14 +6,15 @@ Completed Modes:
 * S - Mr Schwibabyyyy
 * T - Parked Car
 * T - Spiral Alley
+* T - Tri Tri Tri
 
 In Development:
 * S - 3D Pipelines
 * S - Back to Back
 * S - Charts
 * S - Lava Lamp
-* S - Tri Tri Tri
 * T - Doom
+* T - Serpentski Triangle
 
 
 Modes created for the Critter & Guitari Eyesy.
